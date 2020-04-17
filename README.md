@@ -1,16 +1,14 @@
 # test_db
+
 A sample database with an integrated test suite, used to test your applications and database servers
 
-This repository was migrated from [Launchpad](https://launchpad.net/test-db).
+This repository was migrated from [Launchpad](https://launchpad.net/test-db). Forked from [datacharmer/test_db](https://github.com/datacharmer/test_db).
 
 See usage in the [MySQL docs](https://dev.mysql.com/doc/employee/en/index.html)
 
-
 ## Where it comes from
 
-The original data was created by Fusheng Wang and Carlo Zaniolo at 
-Siemens Corporate Research. The data is in XML format.
-http://timecenter.cs.aau.dk/software.htm
+The original data was created by Fusheng Wang and Carlo Zaniolo at Siemens Corporate Research. The data is in XML format. [http://timecenter.cs.aau.dk/software.htm](http://timecenter.cs.aau.dk/software.htm)
 
 Giuseppe Maxia made the relational schema and Patrick Crews exported
 the data in relational format.
@@ -25,8 +23,7 @@ untouched, and use these issues as data cleaning exercises.
 
 ## Prerequisites
 
-You need a MySQL database server (5.0+) and run the commands below through a 
-user that has the following privileges:
+You need a MySQL database server (5.0+) and run the commands below through a user that has the following privileges:
 
     SELECT, INSERT, UPDATE, DELETE, 
     CREATE, DROP, RELOAD, REFERENCES, 
@@ -34,32 +31,30 @@ user that has the following privileges:
     CREATE TEMPORARY TABLES, 
     LOCK TABLES, EXECUTE, CREATE VIEW
 
-## Installation:
+## Installation
 
 1. Download the repository
 2. Change directory to the repository
 
 Then run
 
-    mysql < employees.sql
-
+    mysql [options] < employees.sql
 
 If you want to install with two large partitioned tables, run
 
     mysql < employees_partitioned.sql
 
-
 ## Testing the installation
 
 After installing, you can run one of the following
 
-    mysql -t < test_employees_md5.sql
+    mysql [options] -t < test_employees_md5.sql
     # OR
-    mysql -t < test_employees_sha.sql
+    mysql [options] -t < test_employees_sha.sql
 
 For example:
 
-    mysql  -t < test_employees_md5.sql
+    mysql [options] -t < test_employees_md5.sql
     +----------------------+
     | INFO                 |
     +----------------------+
@@ -96,20 +91,13 @@ For example:
     | salaries     | OK            | ok        |
     +--------------+---------------+-----------+
 
-
 ## DISCLAIMER
 
-To the best of my knowledge, this data is fabricated and
-it does not correspond to real people. 
-Any similarity to existing people is purely coincidental.
-
+To the best of my knowledge, this data is fabricated and it does not correspond to real people. Any similarity to existing people is purely coincidental.
 
 ## LICENSE
-This work is licensed under the 
-Creative Commons Attribution-Share Alike 3.0 Unported License. 
-To view a copy of this license, visit 
-http://creativecommons.org/licenses/by-sa/3.0/ or send a letter to 
-Creative Commons, 171 Second Street, Suite 300, San Francisco, 
-California, 94105, USA.
 
+This work is licensed under the  Creative Commons Attribution-Share Alike 3.0 Unported License.
 
+To view a copy of this license, visit http://creativecommons.org/licenses/by-sa/3.0/ or send a letter to
+Creative Commons, 171 Second Street, Suite 300, San Francisco, California, 94105, USA.
