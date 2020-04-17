@@ -31,6 +31,22 @@ You need a MySQL database server (5.0+) and run the commands below through a use
     CREATE TEMPORARY TABLES, 
     LOCK TABLES, EXECUTE, CREATE VIEW
 
+To test MariaDB table federation via **federatedx** table engine:
+
+MariaDB my.cnf:
+
+    ```conf
+    [mariadb]
+    plugin_load_add=ha_federatedx
+    ```
+
+Federation seperates the table locations across two databases instances:
+
+- instance 0 contains the `employees`, `title`, and `salary` tables.
+- instance 1 contains the `dept_manager`,`departments`, and `dept_emp` tables.
+
+The desire with this division is to stress the communication between the two databases instance across a network via the federatedx table engine.
+
 ## Installation
 
 1. Download the repository
