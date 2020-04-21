@@ -22,9 +22,9 @@
 --  Any similarity to existing people is purely coincidental.
 -- 
 
-DROP DATABASE IF EXISTS employees;
-CREATE DATABASE IF NOT EXISTS employees;
-USE employees;
+DROP DATABASE IF EXISTS test;
+CREATE DATABASE IF NOT EXISTS test;
+USE test;
 
 SELECT 'CREATING DATABASE STRUCTURE' as 'INFO';
 
@@ -47,8 +47,6 @@ CREATE TABLE dept_manager (
    dept_no      CHAR(4)         NOT NULL,
    from_date    DATE            NOT NULL,
    to_date      DATE            NOT NULL,
-   FOREIGN KEY (emp_no)  REFERENCES employees (emp_no)    ON DELETE CASCADE,
-   FOREIGN KEY (dept_no) REFERENCES departments (dept_no) ON DELETE CASCADE,
    PRIMARY KEY (emp_no,dept_no)
 ); 
 
@@ -57,21 +55,21 @@ CREATE TABLE dept_emp (
     dept_no     CHAR(4)         NOT NULL,
     from_date   DATE            NOT NULL,
     to_date     DATE            NOT NULL,
-    FOREIGN KEY (emp_no)  REFERENCES employees   (emp_no)  ON DELETE CASCADE,
-    FOREIGN KEY (dept_no) REFERENCES departments (dept_no) ON DELETE CASCADE,
     PRIMARY KEY (emp_no,dept_no)
 );
 
-CREATE OR REPLACE VIEW dept_emp_latest_date AS
-    SELECT emp_no, MAX(from_date) AS from_date, MAX(to_date) AS to_date
-    FROM dept_emp
-    GROUP BY emp_no;
+CREATE TABLE IF NOT EXISTS employees
+ENGINE="FEDERATED" DEFAULT CHARSET=ucs2
+CONNECTION='employees.employees';
 
-# shows only the current department for each employee
-CREATE OR REPLACE VIEW current_dept_emp AS
-    SELECT l.emp_no, dept_no, l.from_date, l.to_date
-    FROM dept_emp d
-        INNER JOIN dept_emp_latest_date l
-        ON d.emp_no=l.emp_no AND d.from_date=l.from_date AND l.to_date = d.to_date;
+CREATE TABLE IF NOT EXISTS titles
+ENGINE="FEDERATED" DEFAULT CHARSET=ucs2
+CONNECTION='employees.titles';
+
+CREATE TABLE IF NOT EXISTS salaries
+ENGINE="FEDERATED" DEFAULT CHARSET=ucs2
+CONNECTION='employees.salaries';
+
+SHOW WARNINGS;
 
 flush /*!50503 binary */ logs;

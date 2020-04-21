@@ -22,9 +22,9 @@
 --  Any similarity to existing people is purely coincidental.
 -- 
 
-DROP DATABASE IF EXISTS employees;
-CREATE DATABASE IF NOT EXISTS employees;
-USE employees;
+DROP DATABASE IF EXISTS test;
+CREATE DATABASE IF NOT EXISTS test;
+USE test;
 
 SELECT 'CREATING DATABASE STRUCTURE' as 'INFO';
 
@@ -50,7 +50,6 @@ CREATE TABLE titles (
     title       VARCHAR(50)     NOT NULL,
     from_date   DATE            NOT NULL,
     to_date     DATE,
-    FOREIGN KEY (emp_no) REFERENCES employees (emp_no) ON DELETE CASCADE,
     PRIMARY KEY (emp_no,title, from_date)
 ) 
 ; 
@@ -60,9 +59,22 @@ CREATE TABLE salaries (
     salary      INT             NOT NULL,
     from_date   DATE            NOT NULL,
     to_date     DATE            NOT NULL,
-    FOREIGN KEY (emp_no) REFERENCES employees (emp_no) ON DELETE CASCADE,
     PRIMARY KEY (emp_no, from_date)
 ) 
 ; 
+
+CREATE TABLE IF NOT EXISTS departments
+ENGINE="FEDERATED" DEFAULT CHARSET=ucs2
+CONNECTION='employees.departments';
+
+CREATE TABLE IF NOT EXISTS dept_manager
+ENGINE="FEDERATED" DEFAULT CHARSET=ucs2
+CONNECTION='employees.dept_manager';
+
+CREATE TABLE IF NOT EXISTS dept_emp
+ENGINE="FEDERATED" DEFAULT CHARSET=ucs2
+CONNECTION='employees.dept_emp';
+
+SHOW WARNINGS;
 
 flush /*!50503 binary */ logs;

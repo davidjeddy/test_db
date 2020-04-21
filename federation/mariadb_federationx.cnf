@@ -1,0 +1,5 @@
+[mariadb]
+plugin_load_add=ha_federatedx
+
+[mysqld]
+bind=0.0.0.0
