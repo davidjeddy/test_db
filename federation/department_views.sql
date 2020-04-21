@@ -5,7 +5,6 @@ CREATE OR REPLACE VIEW dept_emp_latest_date AS
     FROM dept_emp
     GROUP BY emp_no;
 
-# shows only the current department for each employee
 CREATE OR REPLACE VIEW current_dept_emp AS
     SELECT l.emp_no, dept_no, l.from_date, l.to_date
     FROM dept_emp d

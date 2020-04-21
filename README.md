@@ -2,7 +2,7 @@
 
 A sample database with an integrated test suite, used to test your applications and database servers
 
-This repository was migrated from [Launchpad](https://launchpad.net/test-db). Forked from [datacharmer/test_db](https://github.com/datacharmer/test_db).
+This repository was migrated from GitHub project [datacharmer / test_db](https://github.com/datacharmer/test_db).
 
 See usage in the [MySQL docs](https://dev.mysql.com/doc/employee/en/index.html)
 
@@ -10,16 +10,11 @@ See usage in the [MySQL docs](https://dev.mysql.com/doc/employee/en/index.html)
 
 The original data was created by Fusheng Wang and Carlo Zaniolo at Siemens Corporate Research. The data is in XML format. [http://timecenter.cs.aau.dk/software.htm](http://timecenter.cs.aau.dk/software.htm)
 
-Giuseppe Maxia made the relational schema and Patrick Crews exported
-the data in relational format.
+Giuseppe Maxia made the relational schema and Patrick Crews exported the data in relational format.
 
-The database contains about 300,000 employee records with 2.8 million 
-salary entries. The export data is 167 MB, which is not huge, but
-heavy enough to be non-trivial for testing.
+The database contains about 300,000 employee records with 2.8 million  salary entries. The export data is 167 MB, which is not huge, but heavy enough to be non-trivial for testing.
 
-The data was generated, and as such there are inconsistencies and subtle
-problems. Rather than removing them, we decided to leave the contents
-untouched, and use these issues as data cleaning exercises.
+The data was generated, and as such there are inconsistencies and subtle problems. Rather than removing them, we decided to leave the contents untouched, and use these issues as data cleaning exercises.
 
 ## Prerequisites
 
@@ -31,13 +26,18 @@ You need a MySQL database server (5.0+) and run the commands below through a use
     CREATE TEMPORARY TABLES, 
     LOCK TABLES, EXECUTE, CREATE VIEW
 
-To test MariaDB table federation via **federatedx** table engine:
+## Federation
 
-MariaDB my.cnf:
+To test MariaDB table federation via **federatedx** table engine the **federatedx** storage engine must be enabled:
+
+/etc/my/*.cnf:
 
     ```conf
+    ...
     [mariadb]
+    ...
     plugin_load_add=ha_federatedx
+    ...
     ```
 
 Federation seperates the table locations across two databases instances:
@@ -51,26 +51,27 @@ The desire with this division is to stress the communication between the two dat
 
 1. Download the repository
 2. Change directory to the repository
+3. Change into either `single` or `federated` based on your configuration
 
 Then run
 
-    mysql [options] < employees.sql
+    mysql [options] < ./single/employees.sql
 
 If you want to install with two large partitioned tables, run
 
-    mysql < employees_partitioned.sql
+    mysql < ./single/employees_partitioned.sql
 
 ## Testing the installation
 
 After installing, you can run one of the following
 
-    mysql [options] -t < test_employees_md5.sql
+    mysql [options] -t < ./single/test_employees_md5.sql
     # OR
-    mysql [options] -t < test_employees_sha.sql
+    mysql [options] -t < ./single/test_employees_sha.sql
 
 For example:
 
-    mysql [options] -t < test_employees_md5.sql
+    mysql [options] -t < ./single/test_employees_md5.sql
     +----------------------+
     | INFO                 |
     +----------------------+

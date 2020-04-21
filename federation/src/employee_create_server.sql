@@ -1,8 +1,6 @@
-SET @departments_host = "DEPARTMENT_HOST"
-
 DROP SERVER IF EXISTS 'test_departments';
 CREATE SERVER IF NOT EXISTS 'test_departments' foreign data wrapper 'mysql' options (
-  HOST '@departments_host',
+  HOST 'DEPARTMENT_HOST',
   DATABASE 'test',
   USER 'DEPARTMENT_USER',
   PASSWORD 'DEPARTMENT_PASS',
@@ -13,9 +11,9 @@ CREATE SERVER IF NOT EXISTS 'test_departments' foreign data wrapper 'mysql' opti
 
 SHOW WARNINGS;
 
-DROP SERVER IF EXISTS 'test_department_manager';
-CREATE SERVER IF NOT EXISTS 'test_department_manager' foreign data wrapper 'mysql' options (
-  HOST '@departments_host',
+DROP SERVER IF EXISTS 'test_dept_manager';
+CREATE SERVER IF NOT EXISTS 'test_dept_manager' foreign data wrapper 'mysql' options (
+  HOST 'DEPARTMENT_HOST',
   DATABASE 'test',
   USER 'DEPARTMENT_USER',
   PASSWORD 'DEPARTMENT_PASS',
@@ -26,9 +24,9 @@ CREATE SERVER IF NOT EXISTS 'test_department_manager' foreign data wrapper 'mysq
 
 SHOW WARNINGS;
 
-DROP SERVER IF EXISTS 'test_department_emp';
-CREATE SERVER IF NOT EXISTS 'test_department_emp' foreign data wrapper 'mysql' options (
-  HOST '@departments_host',
+DROP SERVER IF EXISTS 'test_dept_emp';
+CREATE SERVER IF NOT EXISTS 'test_dept_emp' foreign data wrapper 'mysql' options (
+  HOST 'DEPARTMENT_HOST',
   DATABASE 'test',
   USER 'DEPARTMENT_USER',
   PASSWORD 'DEPARTMENT_PASS',

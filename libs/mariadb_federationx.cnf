@@ -1,5 +1,6 @@
 [mariadb]
 plugin_load_add=ha_federatedx
+plugin_load_add=ha_blackhole
 
 [mysqld]
 bind=0.0.0.0

@@ -1,5 +1,7 @@
-1.0.8 2020-04-16
+2.0.0 2020-04-16
   - Added MySQL 5.5 / Mariad 10.x optional federated table configuration
+  - Organized project into `single` and `federated` options
+  - MOVED *.dumps to shared ./dumps directory
 1.0.7 2015-08-30
   - Moved to GitHub
   - Fixed bug#393423 Duplicate key in dept_manager
