@@ -1,7 +1,7 @@
 SET @departments_host = "DEPARTMENT_HOST"
 
-DROP SERVER IF EXISTS 'test_departmentrtments';
-CREATE SERVER IF NOT EXISTS 'test_departmentrtments' foreign data wrapper 'mysql' options (
+DROP SERVER IF EXISTS 'test_departments';
+CREATE SERVER IF NOT EXISTS 'test_departments' foreign data wrapper 'mysql' options (
   HOST '@departments_host',
   DATABASE 'test',
   USER 'DEPARTMENT_USER',

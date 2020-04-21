@@ -58,18 +58,6 @@ CREATE TABLE dept_emp (
     PRIMARY KEY (emp_no,dept_no)
 );
 
-CREATE TABLE IF NOT EXISTS employees
-ENGINE="FEDERATED" DEFAULT CHARSET=ucs2
-CONNECTION='employees.employees';
-
-CREATE TABLE IF NOT EXISTS titles
-ENGINE="FEDERATED" DEFAULT CHARSET=ucs2
-CONNECTION='employees.titles';
-
-CREATE TABLE IF NOT EXISTS salaries
-ENGINE="FEDERATED" DEFAULT CHARSET=ucs2
-CONNECTION='employees.salaries';
-
 SHOW WARNINGS;
 
 flush /*!50503 binary */ logs;

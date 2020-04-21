@@ -42,8 +42,8 @@ MariaDB my.cnf:
 
 Federation seperates the table locations across two databases instances:
 
-- instance 0 contains the `employees`, `title`, and `salary` tables.
-- instance 1 contains the `dept_manager`,`departments`, and `dept_emp` tables.
+- instance `employee` contains the `employees`, `title`, and `salary` tables.
+- instance `departemtn` contains the `dept_manager`,`departments`, and `dept_emp` tables.
 
 The desire with this division is to stress the communication between the two databases instance across a network via the federatedx table engine.
 

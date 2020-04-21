@@ -30,34 +30,46 @@ done
 
 echo "Creating federation SQL with credentials..."
 
-echo "... creating department federation configuration for the employee member..."
+echo "...creating department federation configuration for the employee member..."
 cp -f ./src/department_create_server.sql ./department_create_server.sql
-sed  -i "s/DEPARTMENT_PASS/${pass}/" ./department_create_server.sql
-sed  -i "s/DEPARTMENT_USER/${user}/" ./department_create_server.sql
-sed  -i "s/DEPARTMENT_HOST/${department_private_ip}/" ./department_create_server.sql
+sed  -i "s/EMPLOYEE_PASS/${pass}/" ./department_create_server.sql
+sed  -i "s/EMPLOYEE_USER/${user}/" ./department_create_server.sql
+sed  -i "s/EMPLOYEE_HOST/${department_private_ip}/" ./department_create_server.sql
 
-echo "... creating employee federation configuration for the department member..."
-cp -f ./src/create_employee_server.sql ./create_employee_server.sql
-sed  -i "s/EMPLOYEE_PASS/${pass}/" ./create_employee_server.sql
-sed  -i "s/EMPLOYEE_USER/${user}/" ./create_employee_server.sql
-sed  -i "s/EMPLOYEE_HOST/${employee_private_ip}/" ./create_employee_server.sql
+echo "...creating employee federation configuration for the department member..."
+cp -f ./src/employee_create_server.sql ./employee_create_server.sql
+sed  -i "s/DEPARTMENT_PASS/${pass}/" ./employee_create_server.sql
+sed  -i "s/DEPARTMENT_USER/${user}/" ./employee_create_server.sql
+sed  -i "s/DEPARTMENT_HOST/${employee_private_ip}/" ./employee_create_server.sql
 
-# echo "Applying SQL schema to each cluster..."
+echo "Applying SQL schema to each member of the federated cluster..."
 
-# echo "- Creating employee schema..."
-# # NOTE: Order here matters. Do not change this.
-# mysql -h ${employee_public_ip} -u ${user} -p${pass} < ./employee.sql
+echo "- Creating schemas..."
+mysql -h ${department_public_ip} -u ${user} -p${pass} < ./department_tables.sql
+mysql -h ${employee_public_ip}   -u ${user} -p${pass} < ./employee_tables.sql
+
+echo "- Creating federated servers and tables..."
+mysql -h ${department_public_ip} -u ${user} -p${pass} < ./department_create_server.sql
+mysql -h ${employee_public_ip}   -u ${user} -p${pass} < ./employee_create_server.sql
+mysql -h ${department_public_ip} -u ${user} -p${pass} < ./department_federated_tables.sql
+mysql -h ${employee_public_ip}   -u ${user} -p${pass} < ./employee_federated_tables.sql
+
+echo "- Apply department views..."
+mysql -h ${department_public_ip} -u ${user} -p${pass} < ./department_views.sql
+
+echo "- Checking configuration..."
+ mysql -h ${department_public_ip} -u ${user} -p${pass} -e "SELECT Server_name, Host, Db, Username, Port, Socket, Wrapper, Owner FROM mysql.servers;"
 
 # echo "- Creating employee resources in department instance..."
-# mysql -h ${department_public_ip} -u ${user} -p${pass} < ./create_employee_server.sql
-# mysql -h ${department_public_ip} -u ${user} -p${pass} -e "SELECT Server_name, Host, Db, Username, Port, Socket, Wrapper, Owner FROM mysql.servers;"
+# mysql -h ${department_public_ip} -u ${user} -p${pass} < ./employee_create_server.sql
+
 # mysql -h ${department_public_ip} -u ${user} -p${pass} < ./referance_schemas.sql
 
 # echo "- Creating department schema..."
 # mysql -h ${department_public_ip} -u ${user} -p${pass} < ./level3.sql
 
 # echo "- Creating department resources in employee instance..."
-# mysql -h ${employee_public_ip} -u ${user} -p${pass} < ./create_department_server.sql
+# mysql -h ${employee_public_ip} -u ${user} -p${pass} < ./department_create_server.sql
 # mysql -h ${department_public_ip} -u ${user} -p${pass} -e "SELECT Server_name, Host, Db, Username, Port, Socket, Wrapper, Owner FROM mysql.servers;"
 # mysql -h ${employee_public_ip} -u ${user} -p${pass} < ./department_schemas.sql
 

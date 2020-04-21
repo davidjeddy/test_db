@@ -28,8 +28,8 @@ USE test;
 
 SELECT 'CREATING DATABASE STRUCTURE' as 'INFO';
 
-DROP TABLE IF EXISTS employees
-                     salaries, 
+DROP TABLE IF EXISTS employees,
+                     salaries,
                      titles;
 
 /*!50503 set default_storage_engine = InnoDB */;
@@ -51,8 +51,7 @@ CREATE TABLE titles (
     from_date   DATE            NOT NULL,
     to_date     DATE,
     PRIMARY KEY (emp_no,title, from_date)
-) 
-; 
+);
 
 CREATE TABLE salaries (
     emp_no      INT             NOT NULL,
@@ -60,20 +59,7 @@ CREATE TABLE salaries (
     from_date   DATE            NOT NULL,
     to_date     DATE            NOT NULL,
     PRIMARY KEY (emp_no, from_date)
-) 
-; 
-
-CREATE TABLE IF NOT EXISTS departments
-ENGINE="FEDERATED" DEFAULT CHARSET=ucs2
-CONNECTION='employees.departments';
-
-CREATE TABLE IF NOT EXISTS dept_manager
-ENGINE="FEDERATED" DEFAULT CHARSET=ucs2
-CONNECTION='employees.dept_manager';
-
-CREATE TABLE IF NOT EXISTS dept_emp
-ENGINE="FEDERATED" DEFAULT CHARSET=ucs2
-CONNECTION='employees.dept_emp';
+);
 
 SHOW WARNINGS;
 
