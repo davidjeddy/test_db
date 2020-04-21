@@ -26,8 +26,6 @@ while [ $# -gt 0 ]; do
   shift
 done
 
-# install schemas, enable federation: department <-> employee via linking the department_0 and employee_0 instances
-
 echo "Creating federation SQL with credentials..."
 
 echo "Enabled storage engines..."
@@ -73,7 +71,7 @@ mysql -h ${employee_public_ip} -u ${user} -p${pass} < ./employee_foreign_keys.sq
 echo "- Importing test dataset..."
 mysql -h ${employee_public_ip} -u ${user} -p${pass} < ./load_data.sql
 
-echo "- Validate imported data..."
+echo "- CRC validating imported data..."
 mysql -h ${employee_public_ip} -u ${user} -p${pass} < ./test_employees_md5.sql
 mysql -h ${employee_public_ip} -u ${user} -p${pass} < ./test_employees_sha.sql
 
