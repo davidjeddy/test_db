@@ -120,5 +120,3 @@ DROP TABLE expected_values,found_values;
 select 'CRC' as summary,  if(@crc_fail = 0, "OK", "FAIL" ) as 'result'
 union all
 select 'count', if(@count_fail = 0, "OK", "FAIL" );
-
-

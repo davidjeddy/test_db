@@ -80,7 +80,7 @@ echo "Executing load testing commands..."
 # source https://stackoverflow.com/questions/4219199/can-i-use-mysqlslap-on-an-existing-database
 # source https://rmohan.com/?p=2239
 # source https://dba.stackexchange.com/questions/41645/mysqlslap-chokes-on-strings-that-contain-delimiter
-echo "- md5 against department instance.."
+echo "- md5 against department instance..."
 mysqlslap \
 --create-schema=test \
 --delimiter=";" \
@@ -91,7 +91,7 @@ mysqlslap \
 --user=${user} \
 --verbose
 
-echo "- md5 against employee instance.."
+echo "- md5 against employee instance..."
 mysqlslap \
 --create-schema=test \
 --delimiter=";" \
@@ -102,7 +102,7 @@ mysqlslap \
 --user=${user} \
 --verbose
 
-echo "- 10 iteration of md5 against department instance.."
+echo "- 10 iteration of md5 against department instance *10..."
 mysqlslap \
 --create-schema=test \
 --delimiter=";" \
@@ -114,7 +114,7 @@ mysqlslap \
 --user=${user} \
 --verbose
 
-echo "- 10 iteration md5 against employee instance.."
+echo "- 10 iteration md5 against employee instance *10..."
 mysqlslap \
 --create-schema=test \
 --delimiter=";" \

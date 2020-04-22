@@ -63,27 +63,23 @@ The desire with this division is to stress the communication between the two dat
 Import data set
 
     ```sh
-    mysql [options] < ./single/employees.sql
-    ```
-
-If you want to install with two large partitioned tables, run
-
-    ```sh
-    mysql < ./single/employees_partitioned.sql
+    mysql [options] < employees.sql
+    # OR If you want to install with two large partitioned tables, run
+    mysql [options] < employees_partitioned.sql
     ```
 
 After installing, you can run one of the following
 
     ```sh
-    mysql [options] -t < ./single/test_employees_md5.sql
+    mysql [options] -t < test_employees_md5.sql
     # OR
-    mysql [options] -t < ./single/test_employees_sha.sql
+    mysql [options] -t < test_employees_sha.sql
     ```
 
 For example:
 
     ```sh
-    mysql [options] -t < ./single/test_employees_md5.sql
+    mysql [options] -t < test_employees_md5.sql
     +----------------------+
     | INFO                 |
     +----------------------+
