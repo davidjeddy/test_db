@@ -1,0 +1,10 @@
+SET FOREIGN_KEY_CHECKS = 0;
+TRUNCATE current_dept_emp;
+TRUNCATE departments;
+TRUNCATE dept_emp;
+TRUNCATE dept_emp_latest_date;
+TRUNCATE dept_manager;
+TRUNCATE employees;
+TRUNCATE salaries;
+TRUNCATE titles;
+SET FOREIGN_KEY_CHECKS = 1;
