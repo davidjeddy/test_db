@@ -1,0 +1,40 @@
+DROP SERVER IF EXISTS 'test_departments';
+CREATE SERVER IF NOT EXISTS 'test_departments' foreign data wrapper 'mysql' options (
+  HOST 'DEPARTMENT_HOST',
+  DATABASE 'test',
+  USER 'DEPARTMENT_USER',
+  PASSWORD 'DEPARTMENT_PASS',
+  PORT 3306,
+  SOCKET '',
+  OWNER 'DEPARTMENT_USER'
+);
+
+SHOW WARNINGS;
+
+DROP SERVER IF EXISTS 'test_dept_manager';
+CREATE SERVER IF NOT EXISTS 'test_dept_manager' foreign data wrapper 'mysql' options (
+  HOST 'DEPARTMENT_HOST',
+  DATABASE 'test',
+  USER 'DEPARTMENT_USER',
+  PASSWORD 'DEPARTMENT_PASS',
+  PORT 3306,
+  SOCKET '',
+  OWNER 'DEPARTMENT_USER'
+);
+
+SHOW WARNINGS;
+
+DROP SERVER IF EXISTS 'test_dept_emp';
+CREATE SERVER IF NOT EXISTS 'test_dept_emp' foreign data wrapper 'mysql' options (
+  HOST 'DEPARTMENT_HOST',
+  DATABASE 'test',
+  USER 'DEPARTMENT_USER',
+  PASSWORD 'DEPARTMENT_PASS',
+  PORT 3306,
+  SOCKET '',
+  OWNER 'DEPARTMENT_USER'
+);
+
+SHOW WARNINGS;
+
+SELECT * FROM mysql.servers;
